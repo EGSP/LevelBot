@@ -1,4 +1,5 @@
 using LevelBot.Code.Discord;
+using LevelBot.Code.Files;
 using Serilog;
 using Serilog.Events;
 using Serilog.Extensions.Logging;
@@ -12,7 +13,8 @@ var msLogger = new LoggerFactory().AddSerilog(serilogLogger).CreateLogger("main-
 
 msLogger.LogWarning("Test");
 
-var discordrouter = new DiscordRouter(msLogger);
+var discordrouter = new DiscordRouter(
+    new DirectoryContainer($"{Environment.CurrentDirectory}/content/").Directory("discord"),msLogger);
 await discordrouter.Ini();
 
 app.Run();

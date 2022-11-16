@@ -49,3 +49,13 @@
 2022-11-16 15:08:12.079 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
 2022-11-16 15:08:12.080 +03:00 [INF] Connected
 2022-11-16 15:08:12.901 +03:00 [INF] Ready
+2022-11-16 21:53:37.658 +03:00 [WRN] Test
+2022-11-16 21:54:58.166 +03:00 [WRN] Test
+2022-11-16 22:00:00.418 +03:00 [WRN] Test
+2022-11-16 22:00:30.895 +03:00 [WRN] Test
+2022-11-16 22:00:31.010 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 22:00:31.032 +03:00 [INF] Connecting
+2022-11-16 22:00:32.876 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 22:00:32.876 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 22:00:32.878 +03:00 [INF] Connected
+2022-11-16 22:00:33.689 +03:00 [INF] Ready
