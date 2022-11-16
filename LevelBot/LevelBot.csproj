@@ -17,4 +17,8 @@
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Code\Services" />
+    </ItemGroup>
+
 </Project>

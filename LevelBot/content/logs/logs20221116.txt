@@ -2,3 +2,50 @@
 2022-11-16 13:21:07.724 +03:00 [WRN] Test
 2022-11-16 13:22:23.613 +03:00 [WRN] Test
 2022-11-16 13:34:28.880 +03:00 [WRN] Test
+2022-11-16 14:01:36.935 +03:00 [WRN] Test
+2022-11-16 14:04:26.372 +03:00 [WRN] Test
+2022-11-16 14:05:10.197 +03:00 [WRN] Test
+2022-11-16 14:05:31.144 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 14:05:47.108 +03:00 [WRN] Test
+2022-11-16 14:05:47.210 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 14:05:47.231 +03:00 [INF] Connecting
+2022-11-16 14:05:49.018 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:05:49.019 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:05:49.020 +03:00 [INF] Connected
+2022-11-16 14:05:49.529 +03:00 [INF] Ready
+2022-11-16 14:25:18.683 +03:00 [WRN] Test
+2022-11-16 14:25:18.784 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 14:25:18.807 +03:00 [INF] Connecting
+2022-11-16 14:25:20.332 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:25:20.333 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:25:20.334 +03:00 [INF] Connected
+2022-11-16 14:25:21.249 +03:00 [INF] Ready
+2022-11-16 14:28:57.082 +03:00 [WRN] Test
+2022-11-16 14:28:57.186 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 14:28:57.207 +03:00 [INF] Connecting
+2022-11-16 14:28:58.854 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:28:58.855 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:28:58.859 +03:00 [INF] Connected
+2022-11-16 14:28:59.714 +03:00 [INF] Ready
+2022-11-16 14:52:16.125 +03:00 [WRN] Test
+2022-11-16 14:52:16.231 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 14:52:16.254 +03:00 [INF] Connecting
+2022-11-16 14:52:17.990 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:52:17.991 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:52:17.992 +03:00 [INF] Connected
+2022-11-16 14:52:19.333 +03:00 [INF] Ready
+2022-11-16 14:52:50.732 +03:00 [INF] A SlashCommandExecuted handler has thrown an unhandled exception.
+2022-11-16 14:53:13.732 +03:00 [WRN] Test
+2022-11-16 14:53:13.831 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 14:53:13.853 +03:00 [INF] Connecting
+2022-11-16 14:53:15.453 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:53:15.473 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 14:53:15.475 +03:00 [INF] Connected
+2022-11-16 14:53:16.513 +03:00 [INF] Ready
+2022-11-16 15:08:10.145 +03:00 [WRN] Test
+2022-11-16 15:08:10.267 +03:00 [INF] Discord.Net v3.8.1 (API v10)
+2022-11-16 15:08:10.288 +03:00 [INF] Connecting
+2022-11-16 15:08:12.078 +03:00 [INF] You're using the GuildScheduledEvents gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 15:08:12.079 +03:00 [INF] You're using the GuildInvites gateway intent without listening to any events related to that intent, consider removing the intent from your config.
+2022-11-16 15:08:12.080 +03:00 [INF] Connected
+2022-11-16 15:08:12.901 +03:00 [INF] Ready
