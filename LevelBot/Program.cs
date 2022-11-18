@@ -1,3 +1,4 @@
+using LevelBot.Code.Data;
 using LevelBot.Code.Discord;
 using LevelBot.Code.Files;
 using Serilog;
@@ -27,6 +28,6 @@ Serilog.ILogger CreateSerilog()
         .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
         .Enrich.FromLogContext()
         .WriteTo.Console(theme: AnsiConsoleTheme.Sixteen)
-        .WriteTo.File($"{Environment.CurrentDirectory}/content/logs/logs.txt",rollingInterval: RollingInterval.Day)
+        .WriteTo.File($"{Structure.Logs.Path}/logs.txt",rollingInterval: RollingInterval.Day)
         .CreateLogger();
 }

@@ -12,9 +12,17 @@ public interface IDirectory : IDataContainer
 
 public sealed class DirectoryContainer : IDirectory
 {
+    public IDirectory? Root { get; }
+    
     public DirectoryContainer(string path)
     {
         Path = path+"/";
+    }
+
+    public DirectoryContainer(IDirectory root, string name)
+    {
+        Root = root;
+        Path = Root.Path + "/" + name;
     }
 
     public string Path { get; }
@@ -47,9 +55,9 @@ public static class DataContainerExtensions
     
     public static IFile File(this IDirectory directory, string name)
         => new FileContainer(directory, name);
-    
+
     public static IDirectory Directory(this IDirectory directory, string name)
-        => new DirectoryContainer($"{directory.Path}/{name}/");
+        => new DirectoryContainer(directory, name);
 
     public static void Create(this IFile file)
     {

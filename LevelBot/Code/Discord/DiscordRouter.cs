@@ -1,27 +1,35 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using LevelBot.Code.Databases.Contexts;
+using LevelBot.Code.Discord.Commands;
 using LevelBot.Code.Files;
-using Serilog;
+using LevelBot.Code.Models;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace LevelBot.Code.Discord;
 
-public class DiscordRouter
+public partial class DiscordRouter
 {
-    private readonly IDirectory _directory;
+    private readonly IDirectory _root;
+
     private DiscordSocketClient _client;
 
-    private Dictionary<string, SlashCommand> _slashCommands;
+    private readonly Dictionary<string, SlashCommand> _slashCommands;
 
     public ILogger Logger { get; set; }
-    
-    public DiscordRouter(IDirectory directory, ILogger logger)
+
+    public DiscordRouter(IDirectory root, ILogger logger)
     {
-        _directory = directory;
-        Logger = logger;
-        _slashCommands = new Dictionary<string, SlashCommand>();
+        _root = root;
+        _guilds = root.Directory("guilds");
         
-        _slashCommands.Add("ping", new PingSlash());
+        Logger = logger;
+
+        Databases = new Dictionary<ulong, UserGuildDatabase>();
+        
+        _slashCommands = new Dictionary<string, SlashCommand>();
+        _slashCommands.Add("ping", new PingSlash(this));
+        _slashCommands.Add("add", new AddLevel(this));
     }
 
     public async Task Ini()
@@ -34,7 +42,7 @@ public class DiscordRouter
 
         //  You can assign your bot token to a string, and pass that in to connect.
         //  This is, however, insecure, particularly if you plan to have your code hosted in a public repository.
-        var token = await _directory.File("discord.txt").ReadOrCreate();
+        var token = await _root.File("discord.txt").ReadOrCreate();
         if (string.IsNullOrEmpty(token))
             return;
 

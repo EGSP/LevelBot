@@ -4,28 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LevelBot.Code.Databases;
 
-
-public sealed class SingleContext<TModel> : DbContext
-    where TModel : class
-{
-    public DbSet<TModel> Entities { get; set; }
-
-    private IDirectory Container { get; }
-    private string DatabaseName { get; init; }
-
-    public SingleContext(IDirectory container,string databaseName){
-        DatabaseName = databaseName;
-        Container = container;
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        // Можно использовать как Filename, так и DataSource или Data Source,
-        // т.к. они считатся одинаковыми.
-        optionsBuilder.UseSqlite($"Filename={Container.Path}/{DatabaseName}.db;Mode=ReadWriteCreate;");
-    }
-}
-
 /// <summary>
 /// Объект для доступа к членам базы данных с кешированием.
 /// Он нужен для более удобного взаимодействия с базой данных. 
@@ -33,50 +11,57 @@ public sealed class SingleContext<TModel> : DbContext
 /// <typeparam name="TModel"></typeparam>
 public class UnitDatabase<TModel> where TModel : class
 {
-    public SingleContext<TModel> Data { get; set; }
+    public SingleContext<TModel> Data { get; }
 
     public UnitDatabase(IDirectory container, string databaseName)
     {
         Data = new SingleContext<TModel>(container, databaseName);
     }
-    
+}
+
+public static class UnitDatabaseExtensions
+{
     /// <summary>
     /// Добавляет элемент в память и базу данных.
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    public async Task Add(TModel model)
+    public static async Task Add<TModel>(this UnitDatabase<TModel> db, TModel model)
+        where TModel : class
     {
-        if (Data.Entities.Contains(model))
+        if (db.Data.Entities.Contains(model))
             return;
         
-        await Data.Entities.AddAsync(model);
-        await Data.SaveChangesAsync();
+        await db.Data.Entities.AddAsync(model);
+        await db.Data.SaveChangesAsync();
     }
 
     /// <summary>
     /// Удаленяет элемент из памяти и базы данных.
     /// </summary>
-    public async Task Delete(TModel model)
+    public static async Task Delete<TModel>(this UnitDatabase<TModel> db,TModel model)
+        where TModel : class
     {
-        if (Data.Entities.Contains(model) == false)
+        if (db.Data.Entities.Contains(model) == false)
             return;
         
-        Data.Entities.Remove(model);
-        await Data.SaveChangesAsync();
+        db.Data.Entities.Remove(model);
+        await db.Data.SaveChangesAsync();
     }
 
-    public async Task Delete(Expression<Func<TModel,bool>> predicate)
+    public static async Task Delete<TModel>(this UnitDatabase<TModel> db,Expression<Func<TModel,bool>> predicate)
+        where TModel : class
     {
-        var coin = await Data.Entities.FirstOrDefaultAsync(predicate);
+        var coin = await db.Data.Entities.FirstOrDefaultAsync(predicate);
         if (coin is null)
             return;
 
-        await Delete(coin);
+        await Delete(db, coin);
     }
 
-    public async Task<TModel?> FindOrNull(Expression<Func<TModel,bool>> predicate)
+    public static async Task<TModel?> FindOrNull<TModel>(this UnitDatabase<TModel> db,Expression<Func<TModel,bool>> predicate)
+        where TModel : class
     {
-        return Data.Entities.FirstOrDefault(predicate);
+        return db.Data.Entities.FirstOrDefault(predicate);
     }
 }
