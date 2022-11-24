@@ -35,6 +35,7 @@ public partial class DiscordRouter
         _slashCommands.Add("get", new GetLevel(this));
 
         _slashCommands.Add("step", new StepLevel(this));
+        _slashCommands.Add("view-step", new ViewStepLevel(this));
     }
 
     public async Task Ini()

@@ -13,7 +13,7 @@ public class Level
             return new Level(0);
 
         if (step == 0)
-            throw new InvalidOperationException();
+            step = 1;
 
         var result = MathF.Sqrt((1F/step) * experience.Value);
         return new Level(Convert.ToUInt64(MathF.Floor(result)));
