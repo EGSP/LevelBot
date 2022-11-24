@@ -1,4 +1,5 @@
-﻿using LevelBot.Code.Databases;
+﻿using System.Collections;
+using LevelBot.Code.Databases;
 using LevelBot.Code.Databases.Contexts;
 using LevelBot.Code.Files;
 using LevelBot.Code.Models;
@@ -8,19 +9,22 @@ namespace LevelBot.Code.Drivers;
 
 public class GuildDriver
 {
+    public readonly IDirectory Root;
     public readonly Guild Guild;
 
     private GuildDriver(Guild guild)
     {
         Guild = guild;
+        Root = StaticRoot.Directory($"{Guild.GuildId}");
     }
+    
     static GuildDriver()
     {
         Databases = new Dictionary<ulong, UserGuildDatabase>();
     }
 
     public static Dictionary<ulong, UserGuildDatabase> Databases { get; }
-    public static IDirectory Root { get; set; }
+    public static IDirectory StaticRoot { get; set; }
 
     public static async Task<GuildDriver> OpenAsync(ulong guildId)
     {
@@ -33,7 +37,7 @@ public class GuildDriver
     {
         var guild = new Guild(guildId);
 
-        var database = new UserGuildDatabase(Root.Directory($"{guildId}"), "user-guild-context", NullLogger.Instance);
+        var database = new UserGuildDatabase(StaticRoot.Directory($"{guildId}"), "user-guild-context", NullLogger.Instance);
         await database.Database.EnsureCreatedAsync();
         
         Databases.Add(guildId, database);
@@ -63,7 +67,7 @@ public class GuildDriver
     }
     
     public static IDirectory GetUserDirectory(UserDriver driver) =>
-        Root.Directory(driver.User.Guild.GuildId.ToString()).Directory(driver.User.UserId.ToString());
+        StaticRoot.Directory(driver.User.Guild.GuildId.ToString()).Directory(driver.User.UserId.ToString());
     
     public async Task<GuildUser> CreateGuildUserAsync(ulong guildId, ulong userId)
     {
@@ -83,5 +87,24 @@ public class GuildDriver
 
         var driver = new UserDriver(guildUser);
         return driver;
+    }
+}
+
+public static class GuildDriverExtensions
+{
+    public static async Task<string> GetProperty(this GuildDriver driver, string key, ILogger logger)
+    {
+        var properties = new StringUnitDatabase(driver.Root, "properties", logger);
+        await properties.Database.EnsureCreatedAsync();
+
+        return await properties.GetAsync(key);
+    }
+    
+    public static async Task SetProperty(this GuildDriver driver, string key, string value, ILogger logger)
+    {
+        var properties = new StringUnitDatabase(driver.Root, "properties", logger);
+        await properties.Database.EnsureCreatedAsync();
+
+        await properties.SetAsync(key, value);
     }
 }

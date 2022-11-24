@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using LevelBot.Code.Drivers;
+using LevelBot.Code.Models;
 
 namespace LevelBot.Code.Discord.Commands;
 
@@ -42,7 +43,8 @@ public class GetLevel : SlashCommand
         var guildUser = await guild.OpenUserAsync(user.Id);
 
         var experience = await guildUser.GetExperienceAsync(Router.Logger);
+        var level = Level.Calculate(experience, 100);
         
-        await command.RespondAsync($"У пользователя {user.DisplayName} имеется {experience.Value} опыта");
+        await command.RespondAsync($"У пользователя {user.DisplayName} уровень {level.Value} и {experience.Value} опыта");
     }
 }

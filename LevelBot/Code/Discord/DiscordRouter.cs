@@ -25,7 +25,7 @@ public partial class DiscordRouter
         
         Logger = logger;
 
-        GuildDriver.Root = root.Directory("guilds");
+        GuildDriver.StaticRoot = root.Directory("guilds");
         
         _slashCommands = new Dictionary<string, SlashCommand>();
         _slashCommands.Add("ping", new PingSlash(this));
@@ -59,7 +59,6 @@ public partial class DiscordRouter
 
     private async Task SlashCommandHandler(SocketSlashCommand arg)
     {
-        //await arg.RespondAsync($"Вы вызвали команду {arg.Data.Name}!");
 
         if (!_slashCommands.ContainsKey(arg.Data.Name))
         {
