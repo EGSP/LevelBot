@@ -43,7 +43,8 @@ public class GetLevel : SlashCommand
         var guildUser = await guild.OpenUserAsync(user.Id);
 
         var experience = await guildUser.GetExperienceAsync(Router.Logger);
-        var level = Level.Calculate(experience, 100);
+        var step = await guild.GetPropertyAsync("step", Router.Logger);
+        var level = Level.Calculate(experience, Convert.ToUInt64(step));
         
         await command.RespondAsync($"У пользователя {user.DisplayName} уровень {level.Value} и {experience.Value} опыта");
     }

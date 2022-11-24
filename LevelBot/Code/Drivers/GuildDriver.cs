@@ -92,7 +92,7 @@ public class GuildDriver
 
 public static class GuildDriverExtensions
 {
-    public static async Task<string> GetProperty(this GuildDriver driver, string key, ILogger logger)
+    public static async Task<string> GetPropertyAsync(this GuildDriver driver, string key, ILogger logger)
     {
         var properties = new StringUnitDatabase(driver.Root, "properties", logger);
         await properties.Database.EnsureCreatedAsync();
@@ -100,7 +100,7 @@ public static class GuildDriverExtensions
         return await properties.GetAsync(key);
     }
     
-    public static async Task SetProperty(this GuildDriver driver, string key, string value, ILogger logger)
+    public static async Task SetPropertyAsync(this GuildDriver driver, string key, string value, ILogger logger)
     {
         var properties = new StringUnitDatabase(driver.Root, "properties", logger);
         await properties.Database.EnsureCreatedAsync();

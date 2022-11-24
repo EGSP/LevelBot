@@ -29,9 +29,12 @@ public partial class DiscordRouter
         
         _slashCommands = new Dictionary<string, SlashCommand>();
         _slashCommands.Add("ping", new PingSlash(this));
+        
         _slashCommands.Add("add", new AddLevel(this));
         _slashCommands.Add("set", new SetLevel(this));
         _slashCommands.Add("get", new GetLevel(this));
+
+        _slashCommands.Add("step", new StepLevel(this));
     }
 
     public async Task Ini()
