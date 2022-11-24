@@ -3,14 +3,14 @@
 public class Experience
 {
     public ulong? Id { get; set; }
-    public long Value { get; set; }
+    public ulong Value { get; set; }
 
     public Experience()
     {
         
     }
     
-    public Experience(long value)
+    public Experience(ulong value)
     {
         Value = value;
     }
@@ -37,5 +37,6 @@ public class ExperienceOperation
 public enum OperationType
 {
     Add,
-    Remove
+    Remove,
+    Set
 }

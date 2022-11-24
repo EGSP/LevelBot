@@ -19,6 +19,9 @@
 
     <ItemGroup>
       <Folder Include="Code\Services" />
+      <Folder Include="content\discord\guilds\1003238907133034527\1042385100446367775" />
+      <Folder Include="content\discord\guilds\1003238907133034527\226667389176119296" />
+      <Folder Include="content\discord\guilds\1003238907133034527\765207869032366090" />
     </ItemGroup>
 
 </Project>

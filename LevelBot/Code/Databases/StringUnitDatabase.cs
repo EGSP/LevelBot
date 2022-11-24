@@ -4,32 +4,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LevelBot.Code.Databases;
 
-public class StringUnitDatabase : UnitDatabase<StringUnitProperty>
+public class StringUnitDatabase : Database
 {
-    public StringUnitDatabase(IDirectory container, string databaseName) : base(container, databaseName)
+    public DbSet<StringUnitProperty> Properties { get; set; }
+
+    public StringUnitDatabase(IDirectory container, string name, ILogger logger) : base(container, name, logger)
     {
     }
 
-    public async Task Set(string key, string value)
+    protected override void ModelCreate(ModelBuilder modelBuilder)
     {
-        var property = Data.Entities.FirstOrDefault(x => x.UnitId == key);
+        modelBuilder.Entity<StringUnitProperty>().HasKey(x => x.UnitId);
+    }
+
+    public async Task SetAsync(string key, string value)
+    {
+        var property = Properties.FirstOrDefault(x => x.UnitId == key);
 
         if (property == null)
         {
-            Data.Entities.Add(new StringUnitProperty(key, value));
+            Properties.Add(new StringUnitProperty(key, value));
         }
         else
         {
             property.UnitValue = value;
-            Data.Entities.Update(property);
-            await Data.SaveChangesAsync();
+            Properties.Update(property);
         }
+        
+        await SaveChangesAsync();
     }
 
-    public async Task<string> Get(string key)
+    public async Task<string> GetAsync(string key)
     {
-        var property = await Data.Entities.FirstOrDefaultAsync(x => x.UnitId == key);
+        var property = await Properties.FirstOrDefaultAsync(x => x.UnitId == key);
 
         return property?.UnitValue ?? string.Empty;
-    }  
+    }
 }

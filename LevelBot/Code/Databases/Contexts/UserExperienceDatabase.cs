@@ -14,6 +14,7 @@ public class UserExperienceDatabase : Database
 
     protected override void ModelCreate(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ExperienceOperation>().Navigation<Experience>(x => x.Experience).AutoInclude();
     }
 
     public async Task AddAsync(ExperienceOperation experienceOperation)

@@ -1,24 +1,23 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using LevelBot.Code.Databases.Contexts;
 using LevelBot.Code.Drivers;
 using LevelBot.Code.Models;
 
 namespace LevelBot.Code.Discord.Commands;
 
-public class AddLevel : SlashCommand
+public class SetLevel : SlashCommand
 {
-    public AddLevel(DiscordRouter router) : base(router)
+    public SetLevel(DiscordRouter router) : base(router)
     {
     }
-    
+
     public override Task<SlashCommandProperties> Build(SlashCommandBuilder builder)
     {
-        builder.WithName("add");
-        builder.WithDescription("Добавляет опыт пользовтелю");
+        builder.WithName("set");
+        builder.WithDescription("Устанавливает опыт пользовтелю");
 
         builder.AddOption("expirience", ApplicationCommandOptionType.Integer,
-            description: "Количество добавляемоего опыта", isRequired: true,
+            description: "Количество устанавливаемого опыта", isRequired: true,
             minValue: 0, maxValue: int.MaxValue - 1);
         builder.AddOption("user", ApplicationCommandOptionType.User, 
             "Получатель опыта", isRequired: true);
@@ -46,11 +45,11 @@ public class AddLevel : SlashCommand
 
         var guild = await GuildDriver.OpenAsync(guildId.Value);
         var guildUser = await guild.OpenUserAsync(user.Id);
-
-        var experienceOperation = new ExperienceOperation(new Experience(exp), OperationType.Add, DateTime.Now);
+        
+        var experienceOperation = new ExperienceOperation(new Experience(exp), OperationType.Set, DateTime.Now);
 
         await guildUser.NewCalcExperienceAsync(experienceOperation, Router.Logger);
 
-        await command.RespondAsync($"Вы добавили {exp} опыта пользовтелю {user.DisplayName}");
+        await command.RespondAsync($"Вы установили {exp} опыта пользовтелю {user.DisplayName}");
     }
 }

@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using LevelBot.Code.Databases.Contexts;
 using LevelBot.Code.Discord.Commands;
+using LevelBot.Code.Drivers;
 using LevelBot.Code.Files;
 using LevelBot.Code.Models;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
@@ -21,15 +22,16 @@ public partial class DiscordRouter
     public DiscordRouter(IDirectory root, ILogger logger)
     {
         _root = root;
-        _guilds = root.Directory("guilds");
         
         Logger = logger;
 
-        Databases = new Dictionary<ulong, UserGuildDatabase>();
+        GuildDriver.Root = root.Directory("guilds");
         
         _slashCommands = new Dictionary<string, SlashCommand>();
         _slashCommands.Add("ping", new PingSlash(this));
         _slashCommands.Add("add", new AddLevel(this));
+        _slashCommands.Add("set", new SetLevel(this));
+        _slashCommands.Add("get", new GetLevel(this));
     }
 
     public async Task Ini()
