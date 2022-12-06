@@ -1,10 +1,8 @@
-﻿using Discord;
+﻿using Automata.IO;
+using Discord;
 using Discord.WebSocket;
-using LevelBot.Code.Databases.Contexts;
 using LevelBot.Code.Discord.Commands;
 using LevelBot.Code.Drivers;
-using LevelBot.Code.Files;
-using LevelBot.Code.Models;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace LevelBot.Code.Discord;

@@ -1,4 +1,5 @@
-﻿using LevelBot.Code.Files;
+﻿using Automata.IO;
+using Directory = Automata.IO.Directory;
 
 namespace LevelBot.Code.Data;
 
@@ -10,7 +11,7 @@ public static class Structure
 
     static Structure()
     {
-        Root = new DirectoryContainer(Environment.CurrentDirectory+"/content/");
+        Root = new Directory(Environment.CurrentDirectory+"/content/");
         Logs = Root.Directory("logs");
     }
 }

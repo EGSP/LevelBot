@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutomataK" Version="1.2.1" />
       <PackageReference Include="Discord.Net" Version="3.8.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
@@ -15,12 +16,6 @@
       <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.1-dev-10301" />
       <PackageReference Include="Serilog.Sinks.Console" Version="4.1.1-dev-00896" />
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="content\discord\guilds\1003238907133034527\1042385100446367775" />
-      <Folder Include="content\discord\guilds\1003238907133034527\226667389176119296" />
-      <Folder Include="content\discord\guilds\1003238907133034527\765207869032366090" />
     </ItemGroup>
 
 </Project>

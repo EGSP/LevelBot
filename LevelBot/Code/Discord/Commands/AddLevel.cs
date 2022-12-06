@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using LevelBot.Code.Databases.Contexts;
 using LevelBot.Code.Drivers;
 using LevelBot.Code.Models;
 
